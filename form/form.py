@@ -28,4 +28,15 @@ if st.button('Enviar'):
         INSERT INTO sugestoes (tipo_sugestao, perfil, funcionalidade, sugestao) 
         VALUES (?, ?, ?, ?)
     ''', (tipo_sugestao, perfil, funcionalidade, sugestao))
+    # Limpar o formulário
+    st.session_state['tipo_sugestao'] = 'Melhoria'
+    st.session_state['perfil'] = ''
+    st.session_state['funcionalidade'] = ''
+    st.session_state['sugestao'] = ''    
+    
     st.success('Sugestão cadastrada com sucesso!')
+
+# Exibir as sugestões cadastradas
+if st.checkbox('Mostrar sugestões cadastradas'):
+    data = con.execute('SELECT * FROM sugestoes').fetchall()
+    st.write(data)
